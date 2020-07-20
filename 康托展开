@@ -1,0 +1,37 @@
+//康托展开式
+#include<stdio.h>
+int jiecheng(int num)
+{
+	int i,sum=1;
+	for(i=1;i<=num;i++)
+	{
+		sum=sum*i;
+	}
+	return sum;
+}
+
+int main(void)
+{
+	int a[10],i,j,s,n;
+	int sum=0;
+	j=0;
+	printf("请输入一个n\n");
+	scanf("%d",&n);
+	printf("请输入你的数字\n");
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	for(i=1;i<=n;i++)
+	{
+		s=0;
+		for(j=i+1;j<=n;j++)
+		{
+			if(a[i]>a[j])
+				s++;
+		}
+		sum=sum+s*jiecheng(n-i);
+	}
+	printf("%d\n",sum);
+	return 0;
+}
