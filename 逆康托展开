@@ -1,0 +1,45 @@
+//逆康托展开
+#include<stdio.h>
+int jiecheng(int num)
+{
+	int i,sum=1;
+	if(i==0)
+		sum=1;
+	for(i=1;i<=num;i++)
+	{
+		sum=sum*i;
+	}
+	return sum;
+}
+int main(void)
+{
+	int n,x,a[10]={0};
+	int i,j,t,num[10],k;
+	printf("请输入几位数\n");
+	scanf("%d",&n);
+	printf("请输入你所要的序号\n");
+	scanf("%d",&x);
+	k=x-1;
+	for(i=1;i<=n;i++)
+	{
+		t=k/jiecheng(n-i);
+		for(j=1;j<=n;j++)
+		{
+			if(!a[j])
+			{
+				--t;
+				if(t==0)
+					break;
+			}
+		}
+		a[j]=1;
+		num[i]=j;
+		k%=jiecheng(n-i);
+	}
+	for(i=1;i<=n;i++)
+	{
+		printf("%d",num[i]);
+	}
+	printf("\n");
+	return 0;
+}
