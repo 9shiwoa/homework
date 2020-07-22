@@ -1,0 +1,18 @@
+//同余定理
+#include<stdio.h>
+int main(void)
+{
+	int a,b,m,n;
+	printf("请输入a，b，m\n");
+	scanf("%d%d%d",&a,&b,&m);
+	n=a-b;
+	if(a%m==m%b)
+	{
+		printf("a,b同余\n");
+		if(m%n==0)
+			printf("满足同余定理\n");
+	}
+	else
+		printf("a,b不同余\n");
+	return 0;
+}
