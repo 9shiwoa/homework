@@ -1,0 +1,37 @@
+排序（按从小到大排序）
+#include<stdio.h>
+int main(void)
+{
+	int n,i,j,t,a[100];
+	printf("请输入一个正整数n\n");
+	scanf("%d",&n);
+	printf("请依次输入你所需要排列的数:\n");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	printf("所需要排列的数如下:\n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d ",a[i]);
+	}
+	printf("\n");
+	for(i=1;i<n;i++)
+	{
+		for(j=0;j<n-i;j++)
+		{
+			if(a[j]>a[j+1])
+			{
+				t=a[j];
+				a[j]=a[j+1];
+				a[j+1]=t;
+			}
+		}
+	}
+	printf("所需要排列的数如下:\n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d ",a[i]);
+	}
+	return 0;
+}
