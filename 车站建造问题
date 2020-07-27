@@ -1,0 +1,49 @@
+车站建造问题
+#include<stdio.h>
+#include<math.h>
+int zhishu(int m)
+{
+	int i;
+	if (m==1)
+    {
+        return 1;
+    }
+    for(i=2;i<=sqrt(m);i++)
+    {
+        if((i%m)==0)
+            return 0;
+    }
+    return 1;
+}
+int work(int n, int* a)
+{
+	int count,dis,i;
+	count=n;
+	dis=0;
+	for(i=1;i<n;i++)
+	{
+		dis=a[i]-a[i-1];
+		if((dis==1)||(zhishu(dis)))
+			continue;
+		if((dis%2)==0)
+			count++;
+		else if(zhishu(dis-2))
+			count++;
+		else
+			count+=2;
+	}
+	return count;
+}
+int main(void)
+{
+	int n,i,a[1000];
+	printf("请输入一个正整数\n");
+	scanf("%d",&n);
+	printf("请输入数组a\n");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	printf("%d\n",work(n,a));
+	return 0;
+}
