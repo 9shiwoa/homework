@@ -1,0 +1,26 @@
+打字
+#include<stdio.h>
+void str(char *s,char ch)
+{
+	char *t=s;
+	while(*s!='\0')
+	{
+		if(*s!=ch)
+		{
+			*t++=*s;
+		}
+		s++;
+	}
+	*t='\0';
+}
+int main(void)
+{
+	char s[100],ch;
+	printf("请输入字符串\n");
+	gets(s);
+	printf("请输入特定的字符\n");
+	scanf("%c",&ch);
+	str(s,ch);
+	printf("%s\n",s);
+	return 0;
+}
