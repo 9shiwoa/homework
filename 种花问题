@@ -1,0 +1,38 @@
+种花问题
+#include<stdio.h>
+int fun(int *flower,int flowersize,int n)
+{
+	int m=1,i;
+	for(i=0;i<flowersize;i++)
+	{
+		if(flower[i]==0)
+			m++;
+		else
+		{
+			n=n-(m-1)/2;
+			m=0;
+		}
+	}
+	if(m!=0)
+		n=n-m/2;
+	return n;
+}
+int main(void)
+{
+	int i,flowersize,n;
+	int flower[100];
+	printf("请输入flowersie\n");
+	scanf("%d",&flowersize);
+	printf("请输入flower\n");
+	for(i=0;i<flowersize;i++)
+	{
+		scanf("%d",&flower[i]);
+	}
+	printf("请输入n\n");
+	scanf("%d",&n);
+	if(fun(flower,flowersize,n)<=0)
+		printf("True\n");
+	else
+		printf("False\n");
+	return 0;
+}
