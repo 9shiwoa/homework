@@ -1,0 +1,43 @@
+盛最多水的容器
+//双指针的运用
+#include<stdio.h>
+int maxa(int *h,int hs)
+{
+	int i,j,max;
+	i=0;
+	max=0;
+	j=hs-1;
+	while(i!=j)
+	{
+		if(h[i]<h[j])
+		{
+			if(max>=(j-i)*h[i])
+				max=max;
+			else
+				max=(j-i)*h[i];
+			i++;
+		}
+		else
+		{
+			if(max>=(j-i)*h[j])
+				max=max;
+			else
+				max=(j-i)*h[j];
+			j--;
+		}
+	}
+	return max;
+}
+int main(void)
+{
+	int h[100],hs,i;
+	printf("请输入一个正整数hs\n");
+	scanf("%d",&hs);
+	printf("请输入数组h\n");
+	for(i=0;i<hs;i++)
+	{
+		scanf("%d",&h);
+	}
+	printf("盛最多水的容积是：%d\n",maxa(h,hs));
+	return 0;
+}
