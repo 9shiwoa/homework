@@ -1,4 +1,4 @@
-盛最多水的容器
+盛最多水的容器（源自力扣网）
 //双指针的运用
 #include<stdio.h>
 int maxa(int *h,int hs)
