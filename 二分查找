@@ -1,0 +1,37 @@
+二分查找
+#include<stdio.h>
+int fun(int a[],int key,int n)
+{
+	int low=0;
+	int high=n;
+	int mid;
+	while(low<=high)
+	{
+		mid=(low+high)/2;
+		if(key==a[mid])
+			return mid;
+		else if(key>a[mid])
+			low=mid+1;
+		else
+			high=mid-1;
+	}
+	return -1;
+}
+int main(void)
+{
+	int i,a[100],k,n;
+	printf("请输入数组长度n\n");
+	scanf("%d",&n);
+	printf("请输入你需要查找的数k\n");
+	scanf("%d",&k);
+	printf("请输入数组\n");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	if(fun(a,k,n)>0)
+		printf("在该数组中找到你需要查找的数\n");
+	else
+		printf("在该数组中找到你需要查找的数\n");
+	return 0;
+}
