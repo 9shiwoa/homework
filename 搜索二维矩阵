@@ -1,0 +1,33 @@
+搜索二维矩阵
+#include<stdio.h>
+void fun(int** matrix, int matrixSize, int* matrixColSize, int target){
+    int     iRow        = matrixSize;
+    int     iCol        = matrixColSize[0];
+    int     iMat_L      = 0;
+    int     iMat_R      = iRow * iCol - 1;
+    int     iMat_M      = 0;
+    int     iMat        = 0;
+
+    if ((NULL == matrix) || (0 == matrixSize)) return false;
+
+    while (iMat_L <= iMat_R)
+    {
+        iMat_M = (iMat_L + iMat_R) / 2;
+        iMat = matrix[iMat_M / iCol][iMat_M % iCol];
+
+        if (iMat == target)
+        {
+            return true;
+        }
+        else if (iMat < target)
+        {
+            iMat_L = iMat_M + 1;
+        }
+        else 
+        {
+            iMat_R = iMat_M - 1;
+        }
+    }
+
+    return false;
+}
