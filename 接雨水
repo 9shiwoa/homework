@@ -1,0 +1,47 @@
+接雨水
+#include<stdio.h>
+int fun(int h[], int hs)
+{
+    int i,maxi=0,max=0,water=0,waterl=0;
+    for ( i = 0; i < hs; i++)
+    {
+        if(h[i] > max)
+        {
+            maxi=i;
+            max=h[i];
+        }
+    }
+    waterl = 0;
+    for (i=0; i<maxi;i++)
+    {
+        if(h[i] >waterl)
+        {
+            waterl=h[i];
+        }
+        water += waterl-h[i];
+    }
+    waterl = 0;
+    for(i = hs-1;i>maxi;i--)
+    {
+        if(h[i]>waterl)
+        {
+            waterl =h[i];
+        }
+        water += waterl-h[i];
+    }
+
+    return water;
+}
+int main(void)
+{
+	int i,h[100],hs;
+	printf("请输入一个正整数hs\n");
+	scanf("%d",&hs);
+	printf("请输入数组h\n");
+	for(i=0;i<hs;i++)
+	{
+		scanf("%d",&h[i]);
+	}
+	printf("接雨水的量为：%d\n",fun(h,hs));
+	return 0;
+}
