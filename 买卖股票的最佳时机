@@ -1,0 +1,32 @@
+买卖股票的最佳时机
+#include<stdio.h>
+int fun(int p[],int ps)
+{
+	int i,diff,min,max=0;
+	diff=0;
+	min=p[0];
+	if(ps==0)
+		return 0;
+	for(i=1;i<ps;i++)
+	{
+		if(p[i-1]<min)
+			min=p[i-1];
+		diff=p[i]-min;
+		if(diff>0)
+			max=diff;
+	}
+	return max;
+}
+int main(void)
+{
+	int i,p[100],ps;
+	printf("请输入一个正整数ps\n");
+	scanf("%d",&ps);
+	printf("请输入价格表\n");
+	for(i=0;i<ps;i++)
+	{
+		scanf("%d",&p[i]);
+	}
+	printf("%d\n",fun(p,ps));
+	return 0;
+}
