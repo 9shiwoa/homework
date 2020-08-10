@@ -1,0 +1,23 @@
+数组的相对排序
+int* fun(int* arr1, int arr1Size, int* arr2, int arr2Size, int* returnSize){
+    int arr[1001]={0};
+    int i,j=0;
+    for(i=0;i<arr1Size;i++){//记录arr1数字出现的次数次数
+        arr[arr1[i]]++;
+    }
+    for(i=0;i<arr2Size;i++){//找到在arr2和arr1都出现的数字
+        while(arr[arr2[i]]>0){
+            arr1[j]=arr2[i];
+            j++;
+            arr[arr2[i]]--;
+        }
+    }
+    for(i=0;i<1001;i++){//找arr1有，arr2没有的
+        while(arr[i]>0){
+            arr1[j++]=i;
+            arr[i]--;
+        }
+    }
+    *returnSize=arr1Size;
+    return arr1;
+}
