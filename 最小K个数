@@ -1,0 +1,29 @@
+最小K个数
+#include<stdio.h>
+int main(void)
+{
+	int i,j,t,num,nums[100],k;
+	printf("请输入k的值\n");
+	scanf("%d",&k);
+	printf("请输入数组长度num\n");
+	scanf("%d",&num);
+	printf("请输入数组nums[]\n");
+	for(i=0;i<num;i++)
+	{
+		scanf("%d",&nums[i]);
+	}
+	for(i=1;i<num;i++)
+		for(j=0;j<num-i;j++)
+		{
+			if(nums[j]>nums[j+1])
+			{
+				t=nums[j];
+				nums[j]=nums[j+1];
+				nums[j+1]=t;
+			}
+		}
+	for(i=0;i<k;i++)
+		printf("%d",nums[i]);
+	printf("\n");
+	return 0;
+}
