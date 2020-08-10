@@ -1,0 +1,39 @@
+去掉最低工资和最高工资后的工资平均值
+#include<stdio.h>
+double fun(int *nums,int num)
+{
+	int i,j,t,sum=0;
+	double count;
+	for(i=0;i<num-1;i++)
+	{
+		for(j=i+1;j<num;j++)
+		{
+			if(nums[i]>nums[j])
+			{
+				t=nums[i];
+				nums[i]=nums[j];
+				nums[j]=t;
+			}
+		}
+	}
+	for(i=1;i<num-1;i++)
+	{
+		sum+=nums[i];
+	}
+	count=sum/(num-2);
+	return count;
+}
+int main(void)
+{
+	int i,num,nums[100];
+	printf("请输入数组长度num\n");
+	scanf("%d",&num);
+	printf("请输入数组nums[]\n");
+	for(i=0;i<num;i++)
+	{
+		scanf("%d",&nums[i]);
+	}
+	printf("平均值为:%.5lf\n",fun(nums,num));
+	return 0;
+}
+
