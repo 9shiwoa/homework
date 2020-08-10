@@ -1,0 +1,25 @@
+ H 指数
+ #include<stdio.h>
+ int fun(int* c, int cs)
+{
+    int i=0,j=0;
+    int t=0,h=0;
+    for(i=0;i<cs-1;i++)
+    {
+        for(j=0;j<cs-1-i;j++)
+        {
+            if(c[j]<c[j+1])
+            {
+                t=c[j];
+                c[j]=c[j+1];
+                c[j+1]=t;
+            }
+        }
+    }
+    for(h=cs;h>0;h--)
+    {
+        if(c[h-1]>=h)
+        break;
+    }
+    return h;
+}
