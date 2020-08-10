@@ -1,0 +1,44 @@
+判断能否形成等差数列
+#include<stdio.h>
+int fun(int *nums,int num)
+{
+	int i,j,t,c;
+	for(i=0;i<num;i++)
+	{
+		for(j=0;j<num-i;j++)
+		{
+			if(nums[j]>nums[j+1])
+			{
+				t=nums[j];
+				nums[j]=nums[j+1];
+				nums[j+1]=t;
+			}
+		}
+	}
+	c=nums[1]-nums[0];
+	for(i=1;i<num;i++)
+	{
+		if((nums[i+1]-nums[i])!=c)
+		{
+			break;
+			return -1;
+		}
+	}
+	return 1;
+}
+int main(void)
+{
+	int i,num,nums[100];
+	printf("请输入数组长度num\n");
+	scanf("%d",&num);
+	printf("请输入数组nums[]\n");
+	for(i=0;i<num;i++)
+	{
+		scanf("%d",&nums[i]);
+	}
+	if(fun(nums,num)>0)
+		printf("true\n");
+	else
+		printf("false\n");
+	return 0;
+}
