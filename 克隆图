@@ -1,0 +1,70 @@
+克隆图
+struct Node** visited;
+int* state;  //数组存放结点状态 0：结点未创建 1：仅创建结点 2：结点已创建并已填入所有内容
+
+void bfs(struct Node* s) {
+    if (visited[s->val] && state[s->val] == 2) {
+        return;
+    }
+    struct Node* neighbor;
+    if (visited[s->val]) {
+        neighbor = visited[s->val];
+        neighbor->val = s->val;
+        neighbor->numNeighbors = s->numNeighbors;
+        neighbor->neighbors = (struct Node**)malloc(sizeof(struct Node*) * neighbor->numNeighbors);
+    } else {
+        // 如果没有被访问过，就克隆并存储在哈希表中
+        neighbor = (struct Node*)malloc(sizeof(struct Node));
+        neighbor->val = s->val;
+        neighbor->numNeighbors = s->numNeighbors;
+        neighbor->neighbors = (struct Node**)malloc(sizeof(struct Node*) * neighbor->numNeighbors);
+        visited[s->val] = neighbor;
+    }
+    for (int i = 0; i < neighbor->numNeighbors; i++) {
+        if (visited[s->neighbors[i]->val]) {
+            neighbor->neighbors[i] = visited[s->neighbors[i]->val];
+        } else {
+            visited[s->neighbors[i]->val] = (struct Node*)malloc(sizeof(struct Node));
+            state[s->neighbors[i]->val] = 1;
+            neighbor->neighbors[i] = visited[s->neighbors[i]->val];
+        }
+    }
+    state[neighbor->val] = 2;
+}
+
+struct Node* cloneGraph(struct Node* s) {
+    if (s == NULL) {
+        return NULL;
+    }
+
+    // 将题目给定的节点添加到队列
+    struct Node *QUEUE[101], *p;
+    int head = -1, eneighbor = -1, i, flag[101];
+
+    visited = (struct Node**)malloc(sizeof(struct Node*) * 101);
+    memset(visited, 0, sizeof(struct Node*) * 101);
+    state = (int*)malloc(sizeof(int) * 101);
+    memset(state, 0, sizeof(int) * 101);
+    memset(flag, 0, sizeof(int) * 101);
+
+    // 克隆第一个节点并存储到哈希表中
+    QUEUE[++eneighbor] = s;
+
+    // 广度优先搜索
+    while (head != eneighbor) {
+        // 取出队列的头节点
+        p = QUEUE[++head];
+        // 遍历该节点的邻居
+        bfs(p);
+        for (i = 0; i < p->numNeighbors; i++) {
+            if (!flag[p->neighbors[i]->val]) {
+                // 将邻居节点加入队列中
+                QUEUE[++eneighbor] = p->neighbors[i];
+                flag[p->neighbors[i]->val] = 1;
+            }
+        }
+    }
+
+    return visited[s->val];
+}
+（源自力扣网）
