@@ -1,0 +1,36 @@
+排序（插入排序）
+#include<stdio.h>
+void fun(int *a,int n)
+{
+	int i,j,t;
+	for(i=1;i<n;i++)//i=1,是假设第一个数组元素在有序数组中。
+	{
+		t=a[i];//将t每次赋值为a[i]。
+		j=i-1;
+		while(j>=0 && t<a[j])//'<'从小到大  ‘>’从大到小
+		{
+			a[j+1]=a[j];
+			j--;
+		}
+		a[j+1]=t;//如果插入的数比之前的大,将a[j]与a[j+1]互换 
+	}
+}
+int main(void)
+{
+	int i,n,a[100];
+	printf("请输入数组长度n\n");
+	scanf("%d",&n);
+	printf("请输入数组a[]\n");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	fun(a,n);
+	printf("使用插入排序后\n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d",a[i]);
+	}
+	printf("\n");
+	return 0;
+}
