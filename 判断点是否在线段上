@@ -1,0 +1,42 @@
+判断点是否在线段上
+#include<stdio.h>
+struct point
+{
+ double x,y;
+};
+double direction( point p1,point p2,point p )
+{
+    return ( p1.x -p.x )*( p2.y-p.y) -  ( p2.x -p.x )*( p1.y-p.y)   ;
+}
+ 
+int on_segment( point p1,point p2 ,point p )
+{
+    double max=p1.x > p2.x ? p1.x : p2.x ;
+    double min =p1.x < p2.x ? p1.x : p2.x ;
+ double max1=p1.y > p2.y ? p1.y : p2.y ;
+    double min1=p1.y < p2.y ? p1.y : p2.y ;
+    if( p.x >=min && p.x <=max &&
+  p.y >=min1 && p.y <=max1 )
+        return 1;
+    else
+        return 0;
+}
+int main(void)
+{
+ point p1,p2,q;
+ while( 1 )
+ {
+  scanf("%lf %lf %lf %lf %lf %lf",&q.x ,&q.y ,&p1.x ,&p1.y ,
+   &p2.x ,&p2.y  ) ;
+  if( !on_segment( p1,p2,q ) )
+  {
+   printf("no\n");
+   continue;
+  }
+  if( direction( q,p1,p2 )==0 )
+   printf("yes\n");
+  else
+   printf("no\n");
+ }
+ return 0;
+}
