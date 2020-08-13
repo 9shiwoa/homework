@@ -1,0 +1,18 @@
+KiKi和酸奶
+#include<stdio.h>
+int main(void)
+{
+	int n,h,m,c;
+	printf("请输入酸奶数n\n");
+	scanf("%d",&n);
+	printf("请输入每次喝一瓶酸奶的时间h\n");
+	scanf("%d",&h);
+	printf("请输入多少时间后m\n");
+	scanf("%d",&m);
+	if(m%h==0)
+		c=n-m/h;
+	else
+		c=n-m/h-1;
+	printf("酸奶还剩%d瓶\n",c);
+	return 0;
+}
