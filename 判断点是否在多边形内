@@ -1,0 +1,39 @@
+判断点是否在多边形内
+/************************************************************
+** 函数名称:  InOrOutPolygon
+** 功能描述:  判断点在多边形内外
+** 输入参数:  nvert 顶点个数 vertx 多边形顶点x坐标数组 verty 多边形顶点y坐标数组
+              testx 被判断点位置x坐标 testy 被判断点位置y坐标
+** 输出参数:  NULL
+** 返 回 值:  0:外 1:内
+**************************************************************/
+int InOrOutPolygon(int nvert, float *vertx, float *verty, float testx, float testy)//仅限普通情况
+{
+  int i, j, crossings = 0;
+  for (i = 0, j = nvert-1; i < nvert; j = i++)
+  {
+      // 点在两个x之间 且以点垂直y轴向上做射线
+    if(((vertx[i]>testx) != (vertx[j]>testx))
+    && (testx > (vertx[j]-vertx[i]) * (testy-verty[i]) / (verty[j]-verty[i]) + vertx[i]))
+       crossings++;
+  }
+  return (crossings % 2 != 0);
+}
+int InOrOutPolygon(int nvert, float *vertx, float *verty, float testx, float testy)//特殊情况1.若射线引出的点直接穿过顶点2.若射线穿过定点
+{
+//  int i, j, crossings = 0;
+    crossings = 0;
+    for (i = 0, j = nvert-1; i < nvert; j = i++) 
+    {
+    // 点在两个x之间 且以点垂直y轴向上做射线
+    x1[i] = vertx[i];
+    x1[j] = vertx[j];
+    y1[i] = verty[i];
+    y1[j] = verty[j];
+    if((((vertx[i] < testx) && (vertx[j] >= testx))||((vertx[i] >= testx) && (vertx[j] < testx)))     
+    &&   (testx > (vertx[j]-vertx[i]) * (testy-verty[i]) / (verty[j]-verty[i]) + vertx[i]))
+       crossings++;
+    }
+    return (crossings % 2 != 0);
+}
+（源自网络）
