@@ -1,0 +1,35 @@
+判断矩形是否包含点
+#include<stdio.h>
+int fun(int x1,int y1,int x2,int y2,int x,int y)
+{
+	int t;
+	if(x1>x2)
+	{
+		t=x1;
+		x1=x2;
+		x2=t;
+	}
+	if(y1>y2)
+	{
+		t=y1;
+		y1=y2;
+		y2=t;
+	}
+	if(x>=x1&&x<=x2&&y>=y1&&y<=y2)
+		return 1;
+	else 
+		return 0;
+}
+int main(void)
+{
+	int x1,x2,y1,y2,x,y;
+	printf("请输入对角线的坐标x1,y1 x2,y2\n");
+	scanf("%d%d%d%d",&x1,&y1,&x2,&y2);//只需要确定了对角线的坐标，那么这个矩形也确定了
+	printf("请输入你需要确定的点x,y\n");
+	scanf("%d%d",&x,&y);
+	if(fun(x1,y1,x2,y2,x,y)>0)
+		printf("点在矩形内\n");
+	else
+		printf("点不在矩形内\n");
+	return 0;
+}
