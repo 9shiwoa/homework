@@ -1,0 +1,54 @@
+判断点到线段的最近点
+#include<stdio.h>
+#include<math.h>
+#define MIN(x,y) (x<y?x:y)
+#define MAX(x,y) (x>y?x:y)
+typedef struct
+{
+	double x,y;
+}Point;
+double mindistance(Point p1,Point p2,Point q)
+{
+	int flag =1;
+	double k;
+	Point s;
+	//以下两种情况只需要计算点s到点q的距离即可
+	if(p1.x==p2.x)
+	{
+		s.x=p1.x;
+		s.y=q.y;
+		flag=0;
+	}
+	if(p1.y==p2.y)//与y轴垂直
+	{
+		s.x=q.x;
+		s.y=p1.y;
+		flag=0;
+	}
+	//直线既不与y轴垂直，也不与x轴垂直
+	if(flag)
+	{
+		k=(p2.y-p1.y)/(p2.x-p1.x);//计算直线斜率
+		s.x=(k*k*p1.x+k*(q.y-p1.y)+q.x)/(k*k+1);
+		s.y=k*(s.x-p1.x)+p1.y;
+	}
+	if(MIN(p1.x,p2.x)<=s.x&&s.x<=MAX(p1.x,p2.x))
+		return sqrt((q.x-s.x)*(q.x-s.x)+(q.y-s.y)*(q.y-s.y));
+	//两点间的距离公式，垂线在线段之间。
+	else
+		return MIN(sqrt((q.x-p1.x)*(q.x-p1.x)+(q.y-p1.y)*(q.y-p1.y))
+		,sqrt((q.x-p2.x)*(q.x-p2.x)+(q.y-p2.y)*(q.y-p2.y)));
+}
+int main(void)
+{
+	Point p1,p2,q;
+	double x,y;
+	scanf("%lf%lf",&x,&y);
+	p1.x=x;
+	p1.y=y;
+	scanf("%lf%lf",&x,&y);
+	q.x=x;
+	q.y=y;
+	printf("两点间的距离为%lf\n",mindistance(p1,p2,q));
+	return 0;
+}
