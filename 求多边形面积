@@ -1,0 +1,25 @@
+求多边形面积
+#include<stdio.h>
+double area(double a,double b,double c,double d,double e,double f);
+int main(void)
+{
+    int n;
+    double x[100],y[100];
+    while(scanf("%d",&n)==1 && n>=3 && n<=100)
+    {
+         
+         int i;
+         double sum=0;
+         for(i=0;i<n;i++)
+        {     scanf("%lf%lf",x+i,y+i);
+         if(i>=2)
+             sum+=area(x[0],y[0],x[i-1],y[i-1],x[i],y[i]);
+         }
+         printf("%.1lf\n",sum/2);
+    }
+ 
+}
+double area(double a,double b,double c,double d,double e,double f)
+{
+    return a*d+b*e+c*f-d*e-b*c-a*f;
+}
