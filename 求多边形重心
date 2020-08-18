@@ -1,0 +1,44 @@
+求多边形重心
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct {
+    double x;
+    double y;
+}CoorDinate;
+double Darea(CoorDinate cd[],int i,int j) {
+    return (cd[i].x*cd[j].y - cd[j].x*cd[i].y)/2;
+}
+int main() {
+    int n;
+    int m;
+    double ss = 0;  //元面积
+    double S;   //元面积之和，即多边形面积
+    double gx;  //重心和的 x部分
+    double gy;  //重心和的 y部分
+    CoorDinate *cd; //存放坐标数组
+    scanf("%d", &n);
+    while (n--) {
+        scanf("%d", &m);
+        cd = (CoorDinate *)malloc(sizeof(CoorDinate)*(m+1));
+        for (int i = 1; i <= m; i++) {
+            scanf("%lf%lf",&cd[i].x, &cd[i].y);
+        }
+        S = 0;
+        gx = 0;
+        gy = 0;
+        for (int i = 1; i <= m; i++) {
+            ss = (double)Darea(cd, i, i%m + 1);
+            S += ss;
+            gx += (double)ss*(cd[i].x + cd[i%m + 1].x);
+            gy += (double)ss*(cd[i].y + cd[i%m + 1].y);
+        }
+        if (S == 0)
+            printf("0.000 0.000\n");
+        else
+            printf("%0.3lf %0.3lf\n", fabs(S), (gx + gy) / (3 * S));
+        free(cd);
+    }
+    system("pause");
+    return 0;
+}
