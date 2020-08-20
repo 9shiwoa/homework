@@ -1,0 +1,19 @@
+统计输入字符串中的字符“x”出现的次数。
+#include<stdio.h>
+#include<string.h>
+int main(void)
+{
+	int i,p,count=0;
+	char s[100];
+	printf("请输入字符串s\n");
+	gets(s);
+	p=strlen(s);
+	for(i=0;i<p;i++)
+	{
+		if(s[i]=='x')
+			count++;
+	}
+	printf("出现x的次数为%d\n",count);
+	return 0;
+}
+
