@@ -1,0 +1,113 @@
+字符串匹配KMP算法
+#include<stdio.h>
+#include<malloc.h>
+void create(char s[])   //创建字符串
+{
+	int i;
+	printf("number of chars:\n");
+	scanf("%d",&s[0]);
+	getchar();
+	printf("enter chars:\n");
+	for(i = 1; i < s[0] + 1;i++)
+	{
+		scanf("%c",&s[i]);
+	}
+	getchar();
+	printf("\n");
+	
+}
+void show_array(char s[])     //输出字符串
+{
+      int i = 1;
+      printf("%d ",s[0]);
+      for(;i<s[0] + 1;i++)
+      {
+      	printf("%c ",s[i]);
+      	
+	  }
+	  printf("\n\n");
+}
+void next_array(char *a,int *b)  //构造next数组 
+{
+    int i,j;
+    b[0] = -1;
+    b[1] = 0;
+    i = 0;
+    j = 1;
+    while(j < a[0])
+    {
+    	if(i == 0||a[i] == a[j])
+    	{
+    		i++;
+    		j++;
+    		b[j] = i;
+		}
+		else
+		  i = b[i];
+	}
+    
+}
+void kmp(char s[],char t[],int c[])  //kmp主体
+{
+	int i,j,m;
+	int next[255];        //t串next数组
+	i = 1;
+	j = 1;
+	m = 0;
+	next_array(t,next);   //构造next数组
+	while(i <=s[0])
+	{
+		if(s[i] == t[j] || j == 0)      //匹配字符串
+		   {
+		   	  i++;
+		   	  j++;
+		   	 if(j == t[0]+1)
+		   	 {
+		   	 	 j = 1;
+		   	 	 c[m] = i - t[0];
+		   	 	 m++;
+				}
+		   }
+		   else
+		    j = next[j];
+	}
+}
+int main(void)
+{
+	char a[255];   //s串
+	int i;
+	int next[255];  //s串next数组
+	int c[255];     //存放多个匹配串位置
+	char t[255];   //t串
+	c[0] = 0;   //标记是否有匹配串
+	printf("\n");
+	while(1){
+	printf("array S\n");
+	create(a);            //创建s串
+	printf("array T\n");
+	create(t);           //创建t串
+	printf("char array S\n\n");
+    show_array(a);             
+	printf("char array T\n\n");
+	show_array(t);
+	printf("next array\n\n");
+	next_array(t,next);      
+   for(i = 0;i<t[0]+1;i++)        //显示t串next数组
+        printf("%d ",next[i]);
+   printf("\n\n");
+   kmp(a,t,c);        //KMP
+   printf("KMP");
+   printf("\n\n");
+   i = 0;
+   if(c[i] == 0)    //如果没有则错误
+   printf("error!");
+   else
+   while(c[i] != 0&&c[i] <= a[0])   //否则顺序输出所有匹配串位置
+   {   	
+   	printf("%d ",c[i]);
+   	i++;
+   }
+   printf("\n\n");
+} 
+	return 0;
+}
