@@ -1,0 +1,14 @@
+字符串复制函数
+#include<stdio.h>
+#include<string.h>
+int main(void)
+{
+	char s1[100],s2[100];
+	printf("请输入字符串s1\n");
+	scanf("%s",s1);
+	printf("请输入字符串s2\n");
+	scanf("%s",s2);
+	strcpy(s1,s2);
+	printf("%s\n",s1);
+	return 0;
+}
