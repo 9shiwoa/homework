@@ -1,0 +1,43 @@
+加油站
+#include<stdio.h>
+int fun(int* gas, int gasSize, int* cost, int costSize)
+{ 
+    int i,j,sum;
+    for(i=0;i<gasSize;i++)
+    {
+        if((gas[i]-cost[i])>=0)
+        {
+            j=i;
+            sum=(gas[j]-cost[j]);
+            j++;
+            j=j%gasSize;//确保不能越界
+            while(j!=i&&sum>=0)
+            {
+                sum+=gas[j]-cost[j];
+                j++;
+                j=j%gasSize;
+            }
+            if(i==j&&sum>=0)
+            return i;
+        }
+    }
+    return -1;
+}
+int main(void)
+{
+   int i,gas[100],gs,cost[100],cs;
+   printf("请输入数组长度gs,cs\n");
+   scanf("%d%d",&gs,&cs);
+   printf("请输入加油站数组gas[]\n");
+   for(i=0;i<gs;i++)
+   {
+   scanf("%d",&gas[i]);
+   }
+   printf("请输入耗油数组cost[]\n");
+   for(i=0;i<cs;i++)
+   {
+   scanf("%d",&cost[i])；
+   }
+   printf("结果为：%d\n",fun(gas,gs,codt,cs));
+   return 0;
+   }
