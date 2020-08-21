@@ -1,0 +1,26 @@
+移掉K位数字
+#include<stdio.h>
+char * removeKdigits(char * num, int k){
+    int length=strlen(num),top=-1,i=0;
+    char *stack=(char *)malloc(sizeof(char)*(length+1));
+    for(i;i<length;i++)
+    {
+        while(top!=-1&&stack[top]>num[i]&&k>0)//出栈
+        {
+            top--;
+            k--;
+        }
+        if(num[i]!='0'||top!=-1)//入栈，删除了0之前的所有有效数字就不入栈
+        stack[++top]=num[i];
+    }
+    while(k>0&&top>-1)
+    {
+        top--;
+        k--;
+    }
+    if(top==-1)//里面空空如也
+    stack[++top]='0';
+    stack[++top]='\0';
+    return stack;
+}
+(源自力扣网)
