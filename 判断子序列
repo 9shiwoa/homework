@@ -1,0 +1,32 @@
+判断子序列
+#include<stdio.h>
+#include<string.h>
+int fun(char *s,char *t)
+{
+int i=0,j=0,m,n;
+m=strlen(s);
+n=strlen(t);
+while(i<m&&j<n)
+{
+if(s[i]==t[j])
+i++;
+j++;
+}
+if(i==n)
+return 1;
+else
+return -1;
+}
+int main(void)
+{
+char s[100],t[100];
+printf("请输入字符串s[]\n");
+gets(s);
+printf("请输入字符串t[]\n");
+gets(t);
+if(fun(s,t)>0)
+printf("s是t的子序列\n");
+else
+printf("s不是t的子序列\n");
+return 0;
+}
