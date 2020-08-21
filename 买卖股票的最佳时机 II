@@ -1,0 +1,27 @@
+买卖股票的最佳时机 II
+#include<stdio.h>
+int maxp(int *pc,int pcs)
+{
+	int i,p=0;//p为利润
+	if(pcs==0)
+		return 0;
+	for(i=0;i<pcs;i++)
+	{
+		if(pc[i]<pc[i+1])
+			p+=pc[i+1]-pc[i];
+	}
+	return p;
+}
+int main(void)
+{
+	int i,n,pc[100];
+	printf("请输入价格表的长度n\n");
+	scanf("%d",&n);
+	printf("请输入价格表pc[100]\n");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&pc[i]);
+	}
+	printf("最大的利润为:%d\n",maxp(pc,n));
+	return 0;
+}
