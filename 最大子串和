@@ -1,0 +1,44 @@
+最大子串和
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 6
+//本例为最大m子串和问题解法，最大子段和为本例中m=1时的特殊情况
+int MaxSum(int m, int n, int *a)
+{
+	if (n < m || m < 1)
+		return 0;
+	int *b = new int[n + 1];
+	int *c = new int[n + 1];
+	b[0] = 0;
+	c[1] = 0;
+	for (int i = 1; i <= m; i++)
+	{
+		b[i] = b[i - 1] + a[i];
+		c[i - 1] = b[i];
+		int max = b[i];
+		for (int j = i + 1; j <= i + n - m; j++)
+		{
+			b[j] = b[j - 1] > c[j - 1] ? b[j - 1] + a[j] : c[j - 1] + a[j];
+			c[j - 1] = max;
+			if (max < b[j])
+				max = b[j];
+		}
+		c[i + n - m] = max;
+	}
+	int sum = 0;
+	for (int j = m; j <= n; j++)
+		if (sum < b[j])
+			sum = b[j];
+	return sum;
+}
+int main()
+{
+	int a[MAX];
+	printf("请输入序列：");
+	for (int i = 1; i <= MAX; i++)
+	{
+		scanf_s("%d", &a[i]);
+	}
+	printf("最大子串和为：%d\n", MaxSum(1, MAX, a));
+	return 0;
+}
