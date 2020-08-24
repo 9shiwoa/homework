@@ -1,0 +1,43 @@
+最长单调递增子序列
+#include<stdio.h>
+#include<stdlib.h>
+//在非递减序列 arr[start..end]（闭区间）上二分查找第一个大于key的位置，如果都小于key，就返回end+1
+int binary_search(int arr[], int start, int end, int key){
+    int mid;
+    if (arr[end]<=key)
+        return end+1;      
+    while(start<end){
+        mid=(start+end)/2;
+        if (arr[mid]<=key)  //key在mid右边 ,若取大于等于key的位置则为>。 
+            start=mid+1;
+        else
+            end=mid;		//key在mid左边 
+    }
+    return start;
+}
+int LIS(int a[], int n){						  //最长递增子序 
+	int len=1;
+	int *end=(int *)malloc(sizeof(int)*(n+1));    //存储的对应长度LIS的最小末尾的数组 
+    end[1]=a[0]; 								  //初始化：长度为1的LIS末尾为d[0]
+    for (int i=1;i<n;i++){
+        int pos=binary_search(end,1,len,a[i]); //找到插入位置
+        end[pos]=a[i];
+        if(len<pos) 							  //按需要更新LIS长度
+            len=pos;
+    }
+    return len;
+}
+int main(void)
+{
+	int n;
+	printf("请输入序列长度(n)：");
+	scanf("%d",&n);
+	int *a=(int *)malloc(sizeof(int)*n);
+	printf("\n请输入序列：");
+	for(int i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	printf("\nLIS: %d",LIS(a,n));
+	return 0;
+}
+（源自网络）
