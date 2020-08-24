@@ -1,0 +1,21 @@
+面试题 16.11. 跳水板
+#include<stdio.h>
+int* divingBoard(int shorter, int longer, int k, int* returnSize) {
+    if (k == 0) {
+        *returnSize = 0;
+        return NULL;
+    }
+    if (shorter == longer) {
+        int* p = (int*)malloc(sizeof(int));
+        *p = shorter * k;
+        *returnSize = 1;
+        return p;
+    }
+    *returnSize = k + 1;
+    int* lengths = (int*)malloc(sizeof(int) * (k + 1));
+    for (int i = 0; i <= k; ++i) {
+        lengths[i] = shorter * (k - i) + longer * i;
+    }
+    return lengths;
+}
+(源自力扣网)
