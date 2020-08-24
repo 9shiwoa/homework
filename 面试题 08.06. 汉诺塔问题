@@ -1,0 +1,28 @@
+面试题 08.06. 汉诺塔问题
+#include<stdio.h>
+void move(char x,char y)
+{
+	printf("%c-------%c\n",x,y);
+}
+void hanoi(int m,char a,char b,char c)
+{
+	void move(char x,char y);
+	if(m==1)
+	{
+		move(a,c);
+	}
+	else
+	{
+		hanoi( m-1,a, c, b);//中间过程
+		move(a,c);   //移到正确的地方的函数
+		hanoi( m-1, b, a, c);//中间过程
+	}
+}
+int main(void)
+{
+	int m=0;
+	printf("请输入盘子数：");
+	scanf("%d",&m);
+	hanoi(m,'A','B','C');
+	return 0;
+}
