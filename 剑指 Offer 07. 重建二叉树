@@ -1,0 +1,21 @@
+剑指 Offer 07. 重建二叉树
+#include<stdio.h>
+struct TreeNode {
+     int val;
+     struct TreeNode *left;
+     struct TreeNode *right;
+ };
+ struct TreeNode* buildTree(int* preorder, int preorderSize, int* inorder, int inorderSize){
+    //空数组返回空指针，表示空树
+    if(preorderSize==0) return NULL;
+    int all,num=preorderSize;//标记先序数组第一个元素在中序数组位置
+    struct TreeNode* node=malloc(sizeof(struct TreeNode));
+    node->val=preorder[0];
+    //匹配preorder[0]在inorder的下标
+    while(num--) if(inorder[num]==preorder[0]) break;
+    all=num+1;
+    node->left=buildTree(preorder+1,num,inorder,num);
+    node->right=buildTree(preorder+all,preorderSize-all,inorder+all,inorderSize-all);
+    return node;
+}
+（源自力扣网）
