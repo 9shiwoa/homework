@@ -1,0 +1,26 @@
+第 N 个泰波那契数
+#include<stdio.h>
+int fun(int n)
+{
+	int i,s=0,m=1,l=1,sum=0;
+	if(n==0||n==1)
+		return n;
+	if(n==2)
+		return 1;
+	for(i=3;i<=n;i++)
+	{
+		sum=s+l+m;
+		s=m;
+		m=l;
+		l=sum;
+	}
+	return sum;
+}
+int main(void)
+{
+	int n;
+	printf("请输入正整数n\n");
+	scanf("%d",&n);
+	printf("结果为：%d\n",fun(n));
+	return 0;
+}
