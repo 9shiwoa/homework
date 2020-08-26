@@ -1,0 +1,24 @@
+两两交换链表中的节点
+#include<stdio.h>
+struct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+struct ListNode* swapPairs(struct ListNode* head){
+    if (!head || !head->next)
+        return head;
+    struct ListNode *per = (struct ListNode *)malloc(sizeof(struct ListNode));
+    per->next=head;
+    struct ListNode *newhead = per;
+    while(per->next && per->next->next)
+    {
+        struct ListNode *first = per->next;
+        struct ListNode *second = first->next;
+        first->next = second->next;//根据second的next指针寻找后续链表， 
+        second->next = first;//然后改变second的next指针指向first。
+        per->next = second;//将per前的链表连接到 完成交换的链表
+        per = first;//更新per
+    }
+    return newhead->next;
+}
+(源自力扣网)
