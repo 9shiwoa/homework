@@ -1,0 +1,42 @@
+ 两数相加
+ #include<stdio.h>
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
+    int carry = 0; // 进位
+    struct ListNode *p = l1;
+    struct ListNode *q = l2;
+
+    struct ListNode *ret = (struct ListNode *)malloc(sizeof(struct ListNode)); // 结果
+    ret->val = 0;
+    ret->next = NULL;
+    struct ListNode *tail = ret;
+    
+    while(1){
+        int sum = carry;
+        if(p != NULL){
+            sum += p->val;
+            p = p->next;
+        }
+        if(q != NULL){
+            sum += q->val;
+            q = q->next;
+        }
+        if(sum >= 10){ // 处理进位
+            carry = 1;
+            sum -= 10;
+        }else{
+            carry = 0;
+        }
+
+        tail->val = sum;
+        if(p != NULL || q != NULL || carry > 0){ // 没有计算完毕
+            struct ListNode *n = (struct ListNode *)malloc(sizeof(struct ListNode));
+            n->next = NULL;
+            n->val = 0;
+            tail->next = n;
+            tail = tail->next;
+        }else{ // 已经计算完毕
+            break;
+        }
+    }
+    return ret;
+}
