@@ -1,0 +1,25 @@
+ 数组大小减半
+ #include<stdio.h>
+ int cmp(const void *a, const void *b) {
+    return *(int*)b - *(int*)a;
+}
+int fun(int* arr, int arrSize){
+    int count[100001] = {0};
+    for (int i=0; i<arrSize; ++i) {
+        ++count[arr[i]];
+    }
+    int size = 0;
+    for (int i=0; i<100001; ++i) {
+        if (count[i]) count[size++] = count[i];
+    }
+    qsort(count, size, sizeof(int), cmp);//快排函数
+    int half = arrSize / 2;
+    int n = 0;
+    for (int i=0; i<size; ++i) {
+        half -= count[i];
+        ++n;
+        if (half <= 0) 
+        break;
+    }
+    return n;
+}
