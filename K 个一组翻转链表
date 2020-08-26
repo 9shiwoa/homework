@@ -1,0 +1,33 @@
+K 个一组翻转链表
+#include<stdio.h>
+struct ListNode {
+     int val;
+     struct ListNode *next;
+ };
+struct ListNode *reverse(struct ListNode *head)
+{
+    struct ListNode *prev = NULL, *cur = head, *next = head->next;
+    while (next != NULL)
+    {
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+        next = next->next;
+    }
+    cur->next = prev;
+    return cur;
+}
+
+struct ListNode* reverseKGroup(struct ListNode* head, int k){
+    int i = 0;
+    struct ListNode *ret = NULL, *tempHead = NULL, *cur = head;
+    for (i = 0; i < k - 1 && cur != NULL; i++)
+        cur = cur->next;
+    if (cur == NULL)
+        return head;
+    tempHead = cur->next;
+    cur->next = NULL;
+    ret = reverse(head);
+    head->next = reverseKGroup(tempHead, k);
+    return ret;
+}
