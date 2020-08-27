@@ -1,0 +1,32 @@
+相交链表
+#include<stdio.h>
+struct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    struct ListNode*    pA  = headA;
+    struct ListNode*    pB  = headB;
+
+    if((NULL == headA) || (NULL == headB)) return NULL;
+
+    while(pA != pB)
+    {
+        pA = pA->next;
+        pB = pB->next;
+
+        if((NULL == pA) && (NULL == pB)) return NULL;
+
+        if(NULL == pA)
+        {
+            pA = headB;
+        }
+        if(NULL == pB)
+        {
+            pB = headA;
+        }
+    }
+
+    return pA;
+}
+（摘自力扣网）
