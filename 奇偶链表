@@ -1,0 +1,23 @@
+奇偶链表
+#include<stdio.h>
+struct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+//直接通过修改指针把链表拆分成 奇数位置链表 和 偶数位置链表， 然后把偶数链表头接到奇数链表尾即可
+struct ListNode* oddEvenList(struct ListNode* head){
+    if(head ==NULL || head->next==NULL) return head;
+    struct ListNode* evenHead=head->next;  //记录偶数位置链表的表头，用于最后奇偶相连
+    struct ListNode* odd=head;            //奇数位置指针
+    struct ListNode* even=odd->next;      //偶数位置指针
+    while(even!=NULL && even->next!=NULL)
+    {
+        odd->next=odd->next->next;         //指向后面第二个结点，即把奇数和偶数分开了
+        even->next=even->next->next;
+        odd=odd->next;
+        even=odd->next;
+    }
+    odd->next=evenHead;
+    return head;
+}
+链接：https://leetcode-cn.com/problems/odd-even-linked-list/solution/qi-ou-lian-biao-cyu-yan-by-nuclear-3/
