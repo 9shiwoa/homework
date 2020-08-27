@@ -1,0 +1,38 @@
+两数相加 II
+#include<stdio.h>
+struct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+  int listDepth(struct ListNode *list) {  //计算链的长度，用于后面计算对齐
+    int len = 0;
+    for (struct ListNode *t = list; t ; t = t->next, len++) { }
+    return len;
+}
+
+int func(struct ListNode *l1, int len1, struct ListNode *l2, int len2) {  //递归算出每一位的值，存入长链l1，返回进位结果，
+    if (len1 == 0) return 0;                 //计算结束
+    if (len1 == len2)
+        l1->val += l2->val + func(l1->next, len1 - 1, l2->next, len2 - 1);  //位置对齐
+    else //if (len1 > len2)
+        l1->val += func(l1->next, len1 - 1, l2, len2);     //位置不对齐，则短链用0来代替
+    if (l1->val > 9) {            //计算进位
+        l1->val -= 10;
+        return 1;
+    } else return 0;
+}
+
+struct ListNode* addTwoNumbers(struct ListNode *l1, struct ListNode *l2) {
+    int len1 = listDepth(l1), len2 = listDepth(l2);    //先算两条链的链长
+    if (len1 < len2) {
+        struct ListNode *tmp = l1; l1 = l2; l2 = tmp;      //默认l1为最长链，不是的话，我们就换一下
+        int tmplen = len1; len1 = len2; len2 = tmplen;
+    }
+    int carry = func(l1, len1, l2, len2);   //记录最后一个进位
+    if (carry) {
+        struct ListNode *node = (struct ListNode *)malloc(sizeof(struct ListNode));  //如果最高位还有进位，那个新做一个节点
+        node->val = 1; node->next = l1;
+        return node;
+    } else return l1;   //没有进位直接返回最长链即可
+}
+https://leetcode-cn.com/problems/add-two-numbers-ii/solution/cyu-yan-20mszhan-jie-fa-he-di-gui-jie-fa-by-sheng_/
