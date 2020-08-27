@@ -1,0 +1,23 @@
+反转链表
+#include<stdio.h>
+truct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+struct ListNode* reverseList(struct ListNode* head){
+    typedef struct ListNode * PtrToLNode;
+    PtrToLNode new_head, old_head, temp;
+	
+	old_head=head;		//初始化当前旧表头为head
+	new_head=NULL;		//初始化逆转后新表头为空
+
+	while(old_head){	//当旧表头不为空时
+		temp=old_head->next;
+		old_head->next=new_head;
+		new_head=old_head;
+		old_head=temp;
+	}
+	head=new_head;		//更新head
+	return head;
+}
+https://leetcode-cn.com/problems/reverse-linked-list/solution/shou-hui-man-hua-tu-jie-leetcodezhi-fan-zhuan-lian/
