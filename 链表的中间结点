@@ -1,0 +1,21 @@
+ 链表的中间结点
+ #include<stdio.h>
+ struct ListNode {
+      int val;
+      struct ListNode *next;
+ };
+ struct ListNode* fun(struct ListNode* head){
+    int k;
+    int len = 0;
+    struct ListNode* pNode = head;
+    while (pNode != NULL) {
+        len++;
+        pNode = pNode->next;
+    }   
+    struct ListNode* Node = head;
+    k = (len % 2) ? (len + 1)/2 : ((len/2) + 1);
+    for (int i = 1; i < k; ++i) {
+        Node = Node->next;
+    }
+    return Node;
+}
