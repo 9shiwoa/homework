@@ -1,0 +1,26 @@
+二进制链表转整数
+#include<stdio.h>
+struct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+int getDecimalValue(struct ListNode* head){
+    int j=0;
+    int sum=0;
+    struct ListNode *p;
+    p=head;
+    while(p!=NULL)
+    {
+        p=p->next;
+        j++;
+    }
+    p=head;
+    while(p!=NULL&&j>0)
+    {
+        sum+=((p->val)*pow(2,j-1));
+        j--;
+        p=p->next;
+    }
+    return sum;
+}
+https://leetcode-cn.com/problems/convert-binary-number-in-a-linked-list-to-integer/solution/qiu-zhi-by-sunyang-2/
