@@ -1,0 +1,24 @@
+剑指 Offer 18. 删除链表的节点
+#include<stdio.h>
+struct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+  struct ListNode* deleteNode(struct ListNode* head, int val){
+    if(head == NULL) {
+        return NULL;
+    }
+    if(head->val == val) {
+        return head->next;
+    }
+
+    struct ListNode* pre = head;
+    while ((pre->next != NULL) && (pre->next->val != val)){
+        pre = pre->next;
+    }
+    if(pre->next != NULL) {
+        pre->next = pre->next->next;
+    }
+
+    return head;
+}
