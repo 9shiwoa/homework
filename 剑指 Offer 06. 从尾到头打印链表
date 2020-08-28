@@ -1,0 +1,29 @@
+剑指 Offer 06. 从尾到头打印链表
+#include<stdio.h>
+struct ListNode {
+      int val;
+      struct ListNode *next;
+  };
+int* reversePrint(struct ListNode* head, int* returnSize){
+    struct ListNode *p;
+    int *a;
+    p=head;
+    int j=0;
+    while(p!=NULL)
+    {
+        p=p->next;
+        j++;
+    }
+    a=(int *)malloc(sizeof(int)*j);
+    p=head;
+    *returnSize=j;
+    j=j-1;
+    while(j>=0&&p!=NULL)
+    {
+        a[j]=p->val;
+        p=p->next;
+        j--;
+    }
+    
+    return a;
+}
